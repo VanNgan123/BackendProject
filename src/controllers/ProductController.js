@@ -22,7 +22,6 @@ const upload = multer({ storage, fileFilter });
 
 const createProduct = async (req, res) => {
   try {
-    // Lấy URL ảnh từ file upload
     const imageUrls = req.files ? req.files.map(f => `/uploads/${f.filename}`) : [];
     const product = await productServices.createProduct(req.body, imageUrls);
 
@@ -63,7 +62,6 @@ const getProductById = async(req,res)=>{
     }
 }
 
-// -------------------- UPDATE PRODUCT --------------------
 const updateProduct = async (req, res) => {
   try {
     const updated = await productService.updateProduct(
@@ -77,7 +75,6 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// -------------------- DELETE IMAGE --------------------
 const deleteProductImage = async (req, res) => {
   try {
     const updated = await productService.deleteProductImage(

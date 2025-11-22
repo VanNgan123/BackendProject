@@ -61,7 +61,5 @@ const getProfile = async (req, res) => {
 module.exports = {
   createUser,
   loginUser,
-//   updateUser,
-  // deleteUser,
   getProfile,
 };

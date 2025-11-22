@@ -1,6 +1,6 @@
 const categoryService = require("../services/CategoryServices");
 
-// POST /api/categories
+
 const create = async (req, res) => {
   try {
     console.log("🚀 ~ create ~ req.body:", req.body)
@@ -11,7 +11,6 @@ const create = async (req, res) => {
   }
 };
 
-// GET /api/categories
 const getAll = async (req, res) => {
   try {
     const categories = await categoryService.getAllCategories();
@@ -21,7 +20,6 @@ const getAll = async (req, res) => {
   }
 };
 
-// GET /api/categories/:id
 const getOne = async (req, res) => {
   try {
     const category = await categoryService.getCategoryById(req.params.id);
@@ -31,7 +29,6 @@ const getOne = async (req, res) => {
   }
 };
 
-// PUT /api/categories/:id
 const update = async (req, res) => {
   try {
     const updated = await categoryService.updateCategory(req.params.id, req.body);
