@@ -42,22 +42,13 @@ const loginUser = async (req, res) => {
         message: "Invalid email",
       });
     }
-    const response = await UserService.loginUser(req.body);
+    const response = await UserService.loginUser(email,password);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ message: error.message || error });
   }
 };
 
-// const deleteUser =async (req, res) => {
-//     try {
-//         const userId = req.params.id;
-//         const response = await UserService.deleteUser(userId);
-//         return res.status(200).json(response);
-//     } catch (error) {
-//         return res.status(500).json({ status: "ERR", message: error.message });
-//     }
-// };
 const getProfile = async (req, res) => {
   try {
     const user = await userService.getUserById(req.user.id);
@@ -70,7 +61,7 @@ const getProfile = async (req, res) => {
 module.exports = {
   createUser,
   loginUser,
-  updateUser,
+//   updateUser,
   // deleteUser,
   getProfile,
 };

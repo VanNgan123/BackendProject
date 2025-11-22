@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const { genneralAccessToken, genneralRefreshToken } = require("./JwtServices");
+const { genneralAccessToken } = require("./JwtServices");
 const createUser = async (name, email, password, phone) => {
   try {
     if (!password) {
@@ -32,17 +32,17 @@ const loginUser = async (email, password) => {
   try {
     const user = await User.findOne({ email });
     if (!user) throw new Error("Email not already");
-    const comparePassword = await bcrypt.compare(password, user.password_hash);
+    const comparePassword = await bcrypt.compare(password, user.password);
     if (!comparePassword) throw new Error("wrong password");
     const access_token = genneralAccessToken({
-      id: checkUser.id,
-      isAdmin: checkUser.isAdmin,
+      id: user.id,
+      isAdmin: user.role,
     });
     // const refresh_token = genneralRefreshToken({
     //   id: checkUser.id,
     //   isAdmin: checkUser.isAdmin
     // })
-    return { user, access_token };
+    return {access_token };
   } catch (error) {
     console.log("🚀 ~ loginUser ~ error:", error);
   }
@@ -54,23 +54,7 @@ const getUserById = async (id) => {
   return user;
 };
 
-// const deleteUser = async (id) => {
-//     try {
-//       const checkUser = await User.findOne({ _id: id });
-//       console.log("🚀 ~ deleteUser ~ checkUser:", checkUser)
 
-//       if (checkUser === null) {
-//         return resolve({
-//           status: "OK",
-//           message: "The email is not defined",
-//         });
-//       }
-//       await User.findByIdAndDelete(id);
-
-//     } catch (error) {
-//       console.log("🚀 ~ deleteUser ~ error:", error)
-//     }
-//   };
 
 module.exports = {
   createUser,
